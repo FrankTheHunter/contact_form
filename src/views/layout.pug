@@ -1,0 +1,41 @@
+doctype html
+html
+    head
+        title= pageTitle
+        meta(charset='UTF-8')
+        block styles
+            link(rel='stylesheet', type='text/css', href='./layout.css')  
+    body
+        header(class='header')
+            img(src='https://wpformation.com/wp-content/uploads/2013/06/Blog.png', alt='logo' class="logo_header")
+
+
+            nav(class='nav_bar')
+            a(href='/' class="link")  Home 
+                if isUserLoggedIn
+                    a(href='/logout' class="link") Déconnexion
+                    if isUserAdmin 
+                        a(href='/submit-blog')
+                            img(src='https://i.kisscc0.com/20180817/bww/kisscc0-addition-plus-and-minus-signs-symbol-computer-ic-mono-vcs-add-5b7721dab47842.3761992315345341067392.png', alt='icone' class="icone")
+
+                else 
+                    a(href='/login' class="link") Connexion 
+                    a(href='/inscription' class="link") Inscription
+        block content
+        if isUserLoggedIn  
+            // Utilisez la variable définie dans la session
+            p Vous êtes connecté !
+        else
+            p Vous n'êtes pas connecté.
+        footer(class='footer')
+            section(class="column_footer")
+                p(class="p_footer") Suivez Moi
+                img(src='https://www.griffith.edu.au/__data/assets/image/0026/259730/FB.png', alt='logo' class="icone")
+
+
+            img(src='https://wpformation.com/wp-content/uploads/2013/06/Blog.png', alt='logo' class="logo_footer")
+
+            section(class="column_footer")
+                p(class="p_footer") Contactez-moi
+                p blabla@gmail.com
+                p 07-07-07-07-07

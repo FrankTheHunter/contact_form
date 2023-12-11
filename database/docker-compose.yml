@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  postgres_db:
+    container_name: postgres_db
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_DB=myblog
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+
+    volumes:
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      
+    ports:
+      - "5432:5432"
+  
+  adminer:
+    container_name: adminer
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      ADMINER_DEFAULT_SERVER: "postgres_db"
+
+
+# Tape in powerchell : docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' postgres_db
+# for access in ip adress to postgres

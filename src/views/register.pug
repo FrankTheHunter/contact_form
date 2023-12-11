@@ -1,0 +1,54 @@
+extends ./layout.pug
+
+block content
+
+  section(class="section_form")
+    // Afficher le formulaire sinon
+    h1= pageTitle
+    if messageSuccess
+      // Afficher le message si présent
+      p(class='success')= messageSuccess
+      a(href='/') Revenir à Home <br>
+      a(href='/login') Se connecter
+    else
+
+      form(action='/submit-register' class="formulaire")
+        label(for='firstname' class='label') First name :
+        input(type='text', id='firstname', name='firstname', required class="input", value= getfirstname)
+        if messageErrorFirstname
+          span(class='error')= messageErrorFirstname
+
+        label(for='lastname' class='label') Last name:
+        input(type='text', id='lastname', name='lastname', required class="input", value=getlastname)
+        if messageErrorLastname
+          span(class='error')= messageErrorLastname
+
+        label(for='pseudo' class='label') Pseudo:
+        input(type='text', id='pseudo', name='pseudo', required class="input", value= getpseudo )
+        if messageErrorPseudo
+          span(class='error')= messageErrorPseudo
+
+        label(for='email' class='label') Email :
+        input(type='email', id='email', name='email', required class="input", value= getemail )
+        if messageErrorEmail
+          span(class='error')= messageErrorEmail
+
+        label(for='password' class='label') Password:
+        input(type='password', id='password', name='password', required class="input", value= getpassword )
+        if messageErrorPassword
+          span(class='error')= messageErrorPassword
+
+        label(for='confirmation' class='label') Confirmation password:
+        input(type='password', id='confirmation', name='confirmation', required class="input", value= getconfirmation )
+        if messageErrorConfirmation
+          span(class='error')= messageErrorConfirmation
+
+
+        button(type='submit' class='button') Submit
+
+
+          
+    if messageNosuccess
+      // Afficher le message si présent
+      p(class='error')= messageNosuccess
+

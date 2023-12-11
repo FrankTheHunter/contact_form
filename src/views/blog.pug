@@ -1,0 +1,35 @@
+extends layout.pug
+block styles
+            link(rel='stylesheet', type='text/css', href="layout.css") 
+
+block content 
+
+    section(class="section_form")
+        h1= pageTitle
+        if errors_message 
+            // Afficher erreur si l'utilisateur n'est pas administrateur.
+            createError(403)
+        else 
+            // Afficher le message si présent
+            if messageSuccess
+              p(class='success')= messageSuccess
+
+            else
+              form(action='/submit-blog' class="formulaire")
+                  label(for='title' class='label') Titre:
+                  input(type='text', id='title', name='title' class="text", required )
+                  if messageErrorTitle
+                    span(class='error')= messageErrorTitle
+
+                  label(for='img' class='label') Illustration:
+                  input(type='text', id='img', name='img' class="text" placeholder="Veuillez saisir une URL pour votre image")
+                  if messageErrorIllustration
+                    span(class='error')= messageErrorIllustration
+
+                  label(for='content' class='label') Contenu:
+                  input(type='textarea', id='content', name='content' class="text textarea", required )
+                  if messageErrorContenu
+                    span(class='error')= messageErrorContenu
+                  
+                  button(type='submit', class='button') Submit
+

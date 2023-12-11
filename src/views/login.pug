@@ -1,0 +1,16 @@
+extends layout.pug
+block styles
+            link(rel='stylesheet', type='text/css', href="layout.css") 
+
+block content
+    section(class="section_form")
+      h1= pageTitle
+      form(action='/submit-login' class="formulaire")
+        label(for='login' class='label') Login (Email) :
+        input(type='text', id='login', name='login', required class="input")
+
+        label(for='password'  class='label') Password:
+        input(type='password', id='password', name='password', required  class="input")
+        if messagevoid
+          span(class='error')= messagevoid
+        button(type='submit'  class='button') Submit
