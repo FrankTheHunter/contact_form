@@ -1,0 +1,54 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title Formulaire
+    style.
+      body {
+        text-align: center;
+        margin: 40px;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      form {
+        display: inline-block;
+        text-align: left;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 16px;
+        box-sizing: border-box;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+      }
+
+  body
+    h1 Formulaire
+    form(action='/traitement-formulaire', method='post')
+      label(for='nom') Nom :
+      input(type='text', id='nom', name='nom', required)
+
+      label(for='prenom') Prénom :
+      input(type='text', id='prenom', name='prenom', required)
+
+      label(for='email') Adresse E-mail :
+      input(type='email', id='email', name='email', required)
+
+      label(for='telephone') Numéro de Téléphone :
+      input(type='tel', id='telephone', name='telephone', required)
+
+      button(type='submit') Envoyer

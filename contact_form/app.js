@@ -2,33 +2,23 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-// Middleware pour traiter les requêtes JSON
 app.use(express.json());
-
-// Middleware pour traiter les requêtes URL encodées
 app.use(express.urlencoded({ extended: true }));
 
-// Route principale
-app.get('/', (req, res) => {
-  res.send('Hello, World!');
+// Utiliser Pug comme moteur de modèle
+app.set('view engine', 'pug');
+app.set('views', './views'); // Définir le répertoire des fichiers Pug
+
+// Route pour afficher le formulaire
+app.get('/formulaire', (req, res) => {
+  res.render('formulaire');
 });
 
-// Exemple de route avec des paramètres
-app.get('/greet/:name', (req, res) => {
-  const { name } = req.params;
-  res.send(`Hello, ${name}!`);
-});
-
-// Exemple de route POST
-app.post('/api/messages', (req, res) => {
-  const { message } = req.body;
-  res.json({ response: `Received message: ${message}` });
-});
-
-// Gestionnaire d'erreurs
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Something went wrong!');
+// Route pour traiter le formulaire soumis
+app.post('/traitement-formulaire', (req, res) => {
+  const { nom, prenom, email, telephone } = req.body;
+  // Vous pouvez traiter les données du formulaire ici
+  res.send(`Données reçues : Nom=${nom}, Prénom=${prenom}, Email=${email}, Téléphone=${telephone}`);
 });
 
 // Démarrer le serveur
