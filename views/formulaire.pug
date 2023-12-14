@@ -8,6 +8,9 @@ html
       body {
         text-align: center;
         margin: 40px;
+        background-color: #3498db; /* Set the background color to blue */
+        color: #000; /* Set the text color to black */
+        font-family: Arial, sans-serif; /* Specify a font family */
       }
 
       h1 {
@@ -17,6 +20,10 @@ html
       form {
         display: inline-block;
         text-align: left;
+        background-color: #fff; /* Set the form background color to white */
+        padding: 20px; /* Add some padding to the form */
+        border-radius: 8px; /* Add rounded corners to the form */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
       }
 
       label {
@@ -24,7 +31,7 @@ html
         margin-bottom: 8px;
       }
 
-      input {
+      input, textarea {
         width: 100%;
         padding: 8px;
         margin-bottom: 16px;
@@ -34,6 +41,11 @@ html
       button {
         padding: 10px 20px;
         font-size: 16px;
+        background-color: #3498db; /* Set the button background color to blue */
+        color: #fff; /* Set the button text color to white */
+        border: none; /* Remove the button border */
+        cursor: pointer; /* Add a pointer cursor to the button */
+        border-radius: 4px; /* Add rounded corners to the button */
       }
 
   body
@@ -49,6 +61,6 @@ html
       input(type='email', id='email', name='email', required)
 
       label(for='message') Message :
-      input(type='msg', id='message', name='message', required)
+      textarea(id='message', name='message', required)
 
       button(type='submit') Envoyer
