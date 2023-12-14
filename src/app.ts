@@ -14,6 +14,10 @@ app.get('/formulaire', (req, res) => {
   res.render('formulaire');
 });
 
+app.get('/', (_req, res) => {
+    res.render('home.pug')
+})
+
 // Route pour traiter le formulaire soumis
 app.post('/traitement-formulaire', (req, res) => {
   const { nom, prenom, email, telephone } = req.body;
