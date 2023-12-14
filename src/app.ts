@@ -49,8 +49,8 @@ app.post('/traitement-formulaire', async (req, res) => {
   const { nom, prenom, email, message } = req.body;
   await client.query(`
     INSERT INTO contact (first_name, last_name, email, message)
-    VALUES ('John', 'Doe', 'john.doe@example.com', 'Exemple');
-  `)
+    VALUES ($1::text, 'Doe', 'john.doe@example.com', 'Exemple');
+  `, [nom])
   // Vous pouvez traiter les données du formulaire ici
   res.send(`Données reçues : Nom=${nom}, Prénom=${prenom}, Email=${email}, Message=${message}`);
 });
