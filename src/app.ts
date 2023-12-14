@@ -18,7 +18,7 @@ const pool = new Pool({
             first_name VARCHAR(50),
             last_name VARCHAR(50),
             email VARCHAR(50),
-            phone_number VARCHAR(50)
+            message VARCHAR(50)
         );`)
 
      } catch (err) {
@@ -46,13 +46,13 @@ app.get('/', (_req, res) => {
 // Route pour traiter le formulaire soumis
 app.post('/traitement-formulaire', async (req, res) => {
   const client = await pool.connect()
-  const { nom, prenom, email, telephone } = req.body;
+  const { nom, prenom, email, message } = req.body;
   await client.query(`
-    INSERT INTO contact (first_name, last_name, email, phone_number)
+    INSERT INTO contact (first_name, last_name, email, message)
     VALUES ('John', 'Doe', 'john.doe@example.com', '123-456-7890');
   `)
   // Vous pouvez traiter les données du formulaire ici
-  res.send(`Données reçues : Nom=${nom}, Prénom=${prenom}, Email=${email}, Téléphone=${telephone}`);
+  res.send(`Données reçues : Nom=${nom}, Prénom=${prenom}, Email=${email}, Message=${message}`);
 });
 
 app.get('/contacts', async (req, res) => {
