@@ -14,7 +14,7 @@ app.get('/formulaire', (req, res) => {
   res.render('formulaire');
 });
 
-app.get('/', (_req, res) => {
+app.get('/home', (_req, res) => {
     res.render('home.pug')
 })
 
