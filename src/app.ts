@@ -50,16 +50,22 @@ app.post('/traitement-formulaire', async (req, res) => {
   const { nom, prenom, email, message } = req.body;
 
   try {
+    if (!nom || !prenom || !email || !message) {
+      throw new Error('Veuillez remplir tous les champs du formulaire.');
+    }
+
     await client.query(`
       INSERT INTO contact (first_name, last_name, email, message)
       VALUES ($1::text, $2::text, $3::text, $4::text);
     `, [nom, prenom, email, message]);
 
-    // Rediriger vers la page de succès
+    // Redirect to the success page on successful form submission
     res.redirect('/success');
   } catch (err) {
     console.error(err);
-    res.status(500).send('Erreur interne du serveur');
+
+    // Send a user-friendly error message to the client
+    res.status(500).send('An error occurred while processing the form.');
   } finally {
     client.release();
   }
@@ -71,9 +77,16 @@ app.get('/success', (req, res) => {
 
 app.get('/contacts', async (req, res) => {
   const client = await pool.connect();
-  const { rows } = await client.query(`SELECT * FROM public.contact`);
-  console.log(rows);
-  res.send(JSON.stringify(rows, null, 2));
+  try {
+    const { rows } = await client.query(`SELECT * FROM public.contact`);
+    console.log(rows);
+    res.send(JSON.stringify(rows, null, 2));
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('An error occurred while retrieving contacts.');
+  } finally {
+    client.release();
+  }
 });
 
 app.listen(port, () => {
