@@ -5,10 +5,10 @@ const app = express();
 const port = parseInt(process.env.NODE_PORT || '') || 3000;
 
 const pool = new Pool({
-  database: process.env.POSTGRES_DB  || 'contact_form',
+  database: process.env.POSTGRES_DB || 'contact_form',
   password: 'password',
   user: 'root',
-  host: process.env.POSTGRES_HOST || 'localhost'
+  host: process.env.POSTGRES_HOST || 'localhost',
 });
 
 (async () => {
@@ -53,6 +53,14 @@ app.post('/traitement-formulaire', async (req, res) => {
     if (!nom || !prenom || !email || !message) {
       throw new Error('Please complete all fields on the form.');
     }
+
+    // Check for special characters in the form fields
+    const specialCharsRegex = /[!@#$%^&*(),.?":{}|<>]/;
+    if (specialCharsRegex.test(nom) || specialCharsRegex.test(prenom) || specialCharsRegex.test(message)) {
+      throw new Error('Please avoid using special characters in the name and message fields.');
+    }
+
+    // Add more validation for email if needed
 
     await client.query(`
       INSERT INTO contact (first_name, last_name, email, message)
