@@ -2,13 +2,13 @@ import express from 'express';
 import { Pool } from 'pg';
 
 const app = express();
-const port = 3000;
+const port = parseInt(process.env.NODE_PORT || '') || 3000;
 
 const pool = new Pool({
-  database: 'contact_form',
+  database: process.env.POSTGRES_DB  || 'contact_form',
   password: 'password',
   user: 'root',
-  host: 'localhost'
+  host: process.env.POSTGRES_HOST || 'localhost'
 });
 
 (async () => {

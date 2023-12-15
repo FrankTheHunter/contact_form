@@ -1,5 +1,8 @@
 version: '3.8'
 
+networks:
+  my_network:
+
 services:
   postgres_db:
     container_name: postgres_db
@@ -9,6 +12,30 @@ services:
       - POSTGRES_DB=contact_form
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=password
-
     ports:
       - "5432:5432"
+    networks:
+      - my_network
+
+  nodejs:
+    depends_on:
+      - postgres_db
+    container_name: contact_form
+    environment:
+      - POSTGRES_DB=contact_form
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_HOST=postgres_db
+    image: prout
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./src:/app/src
+      - ./dist:/app/dist
+    working_dir: /app
+    command: npm run dev
+    networks:
+      - my_network
