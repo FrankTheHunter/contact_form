@@ -51,7 +51,7 @@ app.post('/traitement-formulaire', async (req, res) => {
 
   try {
     if (!nom || !prenom || !email || !message) {
-      throw new Error('Veuillez remplir tous les champs du formulaire.');
+      throw new Error('Please complete all fields on the form.');
     }
 
     await client.query(`
