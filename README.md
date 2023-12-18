@@ -34,8 +34,7 @@ Le fichier `docker-compose.yml` définit deux services principaux et les configu
 2. Clonez ce dépôt sur votre machine locale.
 
     ```bash
-    git clone https://github.com/votre-utilisateur/contact-form.git
-    cd contact-form
+    git clone https://github.com/FrankTheHunter/contact_form.git
     ```
 
 3. Exécutez la commande suivante pour démarrer les services.
